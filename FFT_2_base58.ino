@@ -6,7 +6,7 @@
 arduinoFFT FFT = arduinoFFT();
 
 const char base58[] = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
-char key[35];
+char key[34];
 char runningList[5];
 int counter = 0;
 int counter_2 = 0;
@@ -40,7 +40,7 @@ void loop(){
   /*start recording and saving*/
     delay(2000);
     Serial.print(" Recording ");
-    while(counter_2 <= 34){
+    while(counter_2 <= 33){
       mappedPeak = map(FFTcomp(), 200, 1000, 0, 60);
       key[counter_2] = base58[constrain(mappedPeak,0,57)];
       Serial.print(key[counter_2]);
@@ -51,7 +51,7 @@ void loop(){
 
   if(runningList[counter] == 'S'){counter=0;runningList[0]=base58[constrain(mappedPeak,0,57)];}
   if(counter <4){counter+=1;}else{counter=0;counter_2=0;}
-  if(printable){for(int y=0;y<=34;y++){Serial.print(key[y]);}Serial.print(" END OF RECORDING ");printable=false;}
+  if(printable){for(int y=0;y<=33;y++){Serial.print(key[y]);}Serial.print(" END OF RECORDING ");printable=false;}
 
 
 }
