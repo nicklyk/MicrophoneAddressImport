@@ -34,11 +34,11 @@ void loop(){
 
   runningList[counter] = base58[constrain(mappedPeak,0,57)];  //An array with a looping index 'counter'(0-4), used in start checking
   //delay(80);
-
-
+  
   /*Checks if START was played, starts recording the next 35 characters into key[]*/
   if(counter == 4 && runningList[0] == 'S' && runningList[1] == 'T' && runningList[2] == 'A' && runningList[3] == 'R' && runningList[4] == 'T'){
   /*start recording and saving*/
+    delay(2000);
     Serial.print(" Recording ");
     while(counter_2 <= 34){
       mappedPeak = map(FFTcomp(), 200, 1000, 0, 60);
@@ -49,6 +49,7 @@ void loop(){
     printable = true;
   }
 
+  if(runningList[counter] == 'S'){counter=0;runningList[0]=base58[constrain(mappedPeak,0,57)];}
   if(counter <4){counter+=1;}else{counter=0;counter_2=0;}
   if(printable){for(int y=0;y<=34;y++){Serial.print(key[y]);}Serial.print(" END OF RECORDING ");printable=false;}
 
