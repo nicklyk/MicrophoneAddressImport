@@ -28,7 +28,7 @@ void setup() {
 
   /*Main Loop*/
 void loop(){
-  
+
   int mappedPeak = map(FFTcomp(), 200, 1000, 0, 60);  //Maps the peak to a value ranging from 0-60
   Serial.print(base58[constrain(mappedPeak,0,57)]);   //Uses the mapped peak as an index, to print from the base58 array
 
@@ -46,12 +46,14 @@ void loop(){
       Serial.print(key[counter_2]);
       counter_2 += 1;
       }
+    Serial.println(counter);
     printable = true;
+    counter_2=0;
   }
 
-  if(runningList[counter] == 'S'){counter=0;runningList[0]=base58[constrain(mappedPeak,0,57)];}
-  if(counter <4){counter+=1;}else{counter=0;counter_2=0;}
-  if(printable){for(int y=0;y<=33;y++){Serial.print(key[y]);}Serial.print(" END OF RECORDING ");printable=false;}
+  if(runningList[counter] == 'S'){counter=0;runningList[0]='S';}
+  if(counter <4){counter+=1;}else{counter=0;}
+  if(printable){Serial.print(" END OF RECORDING ");for(int y=0;y<=33;y++){Serial.print(key[y]);}Serial.print(" ");printable=false;}
 
 
 }
